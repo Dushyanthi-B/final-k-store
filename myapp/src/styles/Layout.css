@@ -1,0 +1,17 @@
+/* Modern site header/footer */
+.site-header { position: sticky; top: 0; z-index: 50; background: #0b1e33; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+.site-header-inner { display: flex; align-items: center; justify-content: space-between; width: min(1100px, 92%); margin: 0 auto; height: 64px; }
+.site-header .logo { font-weight: 700; font-size: 20px; cursor: pointer; }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.icon-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); cursor: pointer; }
+.icon-btn:hover { background: rgba(255,255,255,0.14); }
+.badge { position: absolute; top: -6px; right: -6px; background: #ff4d4f; color: #fff; font-size: 11px; border-radius: 999px; padding: 2px 6px; min-width: 18px; text-align: center; }
+
+.site-footer { background: #0b1e33; color: #c9d6e6; margin-top: 40px; }
+.site-footer-inner { width: min(1100px, 92%); margin: 0 auto; padding: 18px 0; display: flex; justify-content: space-between; align-items: center; }
+.site-footer .links a { color: #c9d6e6; text-decoration: none; margin-left: 16px; }
+.site-footer .links a:hover { color: #ffffff; }
+
+
+
+

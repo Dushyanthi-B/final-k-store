@@ -1,0 +1,152 @@
+/* General styles */
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f6f9fc;
+    color: #0f2239;
+    overflow-x: hidden;
+  }
+  
+  /* Glass effect background */
+  .glass-effect {
+    background: rgba(33, 52, 72, 0.6); /* Semi-transparent glass-like background with #213448 */
+    backdrop-filter: blur(10px); /* Blurring the background for the glass effect */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    color: #fff;
+  }
+  
+  /* Header */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #213448; /* Dark background for header */
+    padding: 0.75rem 2rem;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* Home Header with Glass Effect */
+  .home-header.glass-effect {
+    background: rgba(33, 52, 72, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .home-header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+.home-header nav .btn {
+    margin-left: 1rem;
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    border: 0;
+  }
+
+.btn.primary { background: linear-gradient(90deg, #2e8bc0, #145da0); color: #fff; }
+.btn.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.btn.outline { background: transparent; color: #145da0; border: 1px solid #145da0; }
+.btn:hover { transform: translateY(-1px); filter: brightness(1.03); }
+  
+  /* Hero Section */
+.home-hero {
+    text-align: center;
+    padding: 3.5rem 0;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+.container { width: min(1100px, 92%); margin: 0 auto; }
+
+.hero-content h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 1rem 0; }
+.hero-content p { font-size: 1.1rem; margin: 0 0 1.25rem 0; color: #2a4666; }
+.hero-cta { display: flex; gap: 0.75rem; justify-content: center; }
+
+.hero-art img { width: 100%; height: 360px; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+
+  .home-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Book Collection */
+.section-title { margin: 0 0 1rem 0; font-size: 1.6rem; }
+
+.book-collection { padding: 2.5rem 0; }
+.book-collection .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  /* Book Card */
+.book-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    text-align: left;
+    padding: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+.book-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.12); }
+  
+.book-card img { width: 100%; height: 260px; object-fit: cover; border-radius: 10px; }
+  
+.book-card h3 { margin: 0.75rem 0 0.25rem 0; font-size: 1.1rem; color: #0f2239; }
+  
+.book-card p { color: #537095; margin: 0; }
+  
+  /* Bookstore Info */
+.bookstore-info { padding: 2.5rem 0; text-align: center; }
+.cta-band { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 2rem 0; }
+.cta-band .cta-text h2 { margin: 0 0 0.5rem 0; }
+.cta-band .cta-text p { margin: 0; color: #2a4666; }
+  
+  /* Footer */
+.home-footer { background: #213448; color: #e8f0f6; padding: 2rem 0; margin-top: 2rem; }
+.footer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+  
+  .home-footer h3 {
+    margin-bottom: 1rem;
+  }
+  
+  .home-footer p {
+    margin: 0.2rem 0;
+  }
+  
+  .home-footer iframe { margin-top: 0.5rem; border: none; border-radius: 8px; width: 100%; height: 220px; }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .home-hero { grid-template-columns: 1fr; text-align: left; }
+    .hero-cta { justify-content: flex-start; }
+  }
+  @media (max-width: 640px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .hero-art img { height: 220px; }
+  }
+  

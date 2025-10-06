@@ -1,0 +1,49 @@
+/* Global theme variables and utility classes */
+:root {
+  --color-bg: #f6f9fc;
+  --color-surface: #ffffff;
+  --color-text: #0f2239;
+  --color-muted: #537095;
+  --color-primary: #2e8bc0;
+  --color-primary-dark: #145da0;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --shadow-1: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-2: 0 16px 36px rgba(0,0,0,0.12);
+}
+
+html, body { background: var(--color-bg); color: var(--color-text); }
+
+.container { width: min(1100px, 92%); margin: 0 auto; }
+
+.surface-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+
+.btn { border: 0; border-radius: var(--radius-md); padding: 10px 16px; height: 40px; line-height: 20px; min-width: 140px; cursor: pointer; transition: transform .15s, box-shadow .2s, filter .2s; font-weight: 600; letter-spacing: .2px; }
+.btn:hover { transform: translateY(-1px); filter: brightness(1.03); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: linear-gradient(90deg, #1e90ff, #145da0); color: #fff; }
+.btn-outline { background: transparent; color: #145da0; border: 2px solid #1e90ff; }
+.btn-ghost { background: #e6f4ff; color: #145da0; border: 1px solid #b3daff; }
+
+.grid { display: grid; gap: 1rem; }
+
+/* 3D utilities */
+.fx-perspective { perspective: 1000px; }
+.fx-tilt { transform-style: preserve-3d; will-change: transform, box-shadow; transition: transform .25s ease, box-shadow .25s ease; }
+.fx-tilt:hover { transform: translateY(-6px) rotateX(2deg) rotateY(-2deg); box-shadow: var(--shadow-2); }
+
+/* Shimmer highlight on hover */
+.fx-shine { position: relative; overflow: hidden; }
+.fx-shine::after { content: ""; position: absolute; inset: -30% -60%; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 20%, transparent 40%); transform: translateX(-100%); }
+.fx-shine:hover::after { animation: shineSweep 900ms ease; }
+
+@keyframes shineSweep { to { transform: translateX(120%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .fx-tilt, .fx-shine::after { transition: none !important; animation: none !important; }
+}
+
