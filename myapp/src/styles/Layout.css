@@ -1,5 +1,5 @@
 /* Modern site header/footer */
-.site-header { position: sticky; top: 0; z-index: 50; background: #0b1e33; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+.site-header { position: sticky; top: 0; z-index: 50; background: #15173D; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
 .site-header-inner { display: flex; align-items: center; justify-content: space-between; width: min(1100px, 92%); margin: 0 auto; height: 64px; }
 .site-header .logo { font-weight: 700; font-size: 20px; cursor: pointer; }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
@@ -7,11 +7,61 @@
 .icon-btn:hover { background: rgba(255,255,255,0.14); }
 .badge { position: absolute; top: -6px; right: -6px; background: #ff4d4f; color: #fff; font-size: 11px; border-radius: 999px; padding: 2px 6px; min-width: 18px; text-align: center; }
 
-.site-footer { background: #0b1e33; color: #c9d6e6; margin-top: 40px; }
-.site-footer-inner { width: min(1100px, 92%); margin: 0 auto; padding: 18px 0; display: flex; justify-content: space-between; align-items: center; }
-.site-footer .links a { color: #c9d6e6; text-decoration: none; margin-left: 16px; }
-.site-footer .links a:hover { color: #ffffff; }
+.site-footer {
+  background: #15173D;
+  color: #E8E2DB;
+  margin-top: 40px;
+}
 
+.site-footer-inner {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 24px 0 32px;
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  gap: 24px;
+  align-items: flex-start;
+}
 
+.footer-column h3,
+.footer-column h4 {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+}
 
+.footer-column p,
+.footer-column li {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #E8E2DB;
+}
 
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column a {
+  color: #E8E2DB;
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  color: #547792;
+}
+
+.footer-copy {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 800px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}@media (max-width: 540px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}

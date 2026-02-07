@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Register.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react'; // 👁️ icons
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -66,8 +68,16 @@ const Register = () => {
         'http://127.0.0.1:5000/api/auth/register',
         formData
       );
-      localStorage.setItem('token', response.data.token);
-      alert('Registration successful!');
+      // Optional: keep token if API returns it; respect "remember me" like login
+      if (response.data?.token) {
+        if (formData.rememberMe) {
+          localStorage.setItem('token', response.data.token);
+        } else {
+          sessionStorage.setItem('token', response.data.token);
+        }
+      }
+      alert('Registration successful! Please log in to continue.');
+      navigate('/login');
     } catch (error) {
       alert(error.response?.data?.message || 'Registration failed.');
     }
@@ -159,6 +169,16 @@ const Register = () => {
             onChange={handleChange}
             required
           />
+
+          <div className="remember">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleChange}
+            />
+            <label>Remember Me</label>
+          </div>
 
           <button className="btn btn-primary" type="submit" disabled={!isValid}>
             Register

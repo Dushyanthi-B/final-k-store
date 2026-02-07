@@ -13,35 +13,38 @@ const Home = () => {
       <SiteHeader variant="home" />
 
       <main className="home-body">
-        <section className="home-hero container">
+        <section className="home-hero container animate-hero">
           <div className="hero-content">
-            <h1>Stories that stay. Knowledge that grows.</h1>
-            <p>Discover bestsellers, timeless classics, and your next great read curated for you.</p>
-            <div className="hero-cta">
-              <button className="btn btn-primary" onClick={() => navigate('/booklist')}>Browse books</button>
+            <h1 className="animate-title">Stories that stay. Knowledge that grows.</h1>
+            <p className="animate-subtitle">Discover bestsellers, timeless classics, and your next great read curated for you.</p>
+            <div className="hero-cta animate-buttons">
+              <button className="btn btn-primary" onClick={() => navigate('/login')}>Browse books</button>
               <button className="btn btn-outline" onClick={() => navigate('/register')}>Create account</button>
             </div>
           </div>
-          <div className="hero-art" aria-hidden>
+          <div className="hero-art animate-image" aria-hidden>
             <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Bookshelf" />
           </div>
         </section>
 
-        <section className="features container">
-          <div className="feature">
-            <div className="icon">🧠</div>
-            <h3>Smart picks</h3>
-            <p>Personalized recommendations based on what you love.</p>
-          </div>
-          <div className="feature">
-            <div className="icon">⚡</div>
-            <h3>Fast checkout</h3>
-            <p>Seamless cart and secure payments, every time.</p>
-          </div>
-          <div className="feature">
-            <div className="icon">🌍</div>
-            <h3>Wide selection</h3>
-            <p>From global bestsellers to indie gems across genres.</p>
+        <section className="services-section container">
+          <h2 className="section-title animate-fade-in">Why shop with K‑Books?</h2>
+          <div className="services-grid">
+            <article className="service-card fx-tilt fx-shine animate-card-appear">
+              <div className="service-icon">⚡</div>
+              <h3>Lightning‑fast delivery</h3>
+              <p>Your favorite titles shipped quickly and safely to your doorstep.</p>
+            </article>
+            <article className="service-card fx-tilt fx-shine animate-card-appear-delay">
+              <div className="service-icon">🧠</div>
+              <h3>Curated for you</h3>
+              <p>Smart recommendations based on your reading history and interests.</p>
+            </article>
+            <article className="service-card fx-tilt fx-shine animate-card-appear-delay-2">
+              <div className="service-icon">🔒</div>
+              <h3>Secure checkout</h3>
+              <p>Encrypted, trusted payments so you can shop with confidence.</p>
+            </article>
           </div>
         </section>
 
@@ -85,6 +88,72 @@ const Home = () => {
             We’re on a mission to connect people with books they can’t put down. Enjoy a smooth
             experience with trusted reviews, helpful search, and friendly support.
           </p>
+        </section>
+
+        <section className="categories-section container">
+          <h2 className="section-title animate-fade-in">Browse by category</h2>
+          <div className="categories-grid">
+            <div className="category-pill animate-pill-hover">Fiction &amp; Literature</div>
+            <div className="category-pill animate-pill-hover">Self‑help &amp; Productivity</div>
+            <div className="category-pill animate-pill-hover">Business &amp; Finance</div>
+            <div className="category-pill animate-pill-hover">Science &amp; Technology</div>
+            <div className="category-pill animate-pill-hover">Kids &amp; Young Adult</div>
+            <div className="category-pill animate-pill-hover">Classics</div>
+          </div>
+        </section>
+
+        <section className="stats-section">
+          <div className="container stats-grid">
+            <div className="stat-card">
+              <span className="stat-number">10k+</span>
+              <span className="stat-label">Happy readers</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">50k+</span>
+              <span className="stat-label">Books in stock</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">4.9★</span>
+              <span className="stat-label">Average rating</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="testimonials-section container">
+          <h2 className="section-title animate-fade-in">Readers love K‑Books</h2>
+          <div className="testimonials-grid">
+            <article className="testimonial-card animate-testimonial">
+              <p className="quote">
+                “I always find something new to read. The recommendations feel tailored to me.”
+              </p>
+              <p className="author">— Amina, student</p>
+            </article>
+            <article className="testimonial-card animate-testimonial">
+              <p className="quote">
+                “Checkout is smooth and delivery is fast. My go‑to online bookstore.”
+              </p>
+              <p className="author">— Rahul, entrepreneur</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="newsletter-section">
+          <div className="container newsletter-inner">
+            <div>
+              <h2>Stay in the chapter loop</h2>
+              <p>Get early access to deals, new arrivals, and reading tips in your inbox.</p>
+            </div>
+            <form
+              className="newsletter-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Subscribed to K‑Books newsletter!');
+              }}
+            >
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" className="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
         </section>
       </main>
 

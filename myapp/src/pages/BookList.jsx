@@ -65,9 +65,9 @@ const BookList = () => {
   
       const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
       for (let category of categories) {
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${category}`;
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=40`;
         const res = await axios.get(url, {
-          params: apiKey ? { key: apiKey } : undefined,
+          params: apiKey ? { key: apiKey, maxResults: 40 } : { maxResults: 40 },
           validateStatus: (s) => s >= 200 && s < 300, // throw manually on 401
         }).catch((e) => {
           // Re-throw axios error with status for handling below
