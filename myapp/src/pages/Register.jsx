@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Eye, EyeOff } from 'lucide-react'; // 👁️ icons
+import { Eye, EyeOff } from 'lucide-react';
+import API_URL from '../config/api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Register = () => {
   });
   const [errors, setErrors] = useState({ email: '', password: '' });
   const [isValid, setIsValid] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // 👈 state for view toggle
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,7 +38,7 @@ const Register = () => {
     }
 
     if (name === 'password') {
-      const strong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/; // strong password
+      const strong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
       setErrors((p) => ({
         ...p,
         password: strong.test(value)
@@ -65,10 +66,9 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://127.0.0.1:5000/api/auth/register',
+        `${API_URL}/api/auth/register`,
         formData
       );
-      // Optional: keep token if API returns it; respect "remember me" like login
       if (response.data?.token) {
         if (formData.rememberMe) {
           localStorage.setItem('token', response.data.token);
@@ -109,7 +109,6 @@ const Register = () => {
           />
           {errors.email && <small style={{ color: '#d4380d' }}>{errors.email}</small>}
 
-          {/* 👇 Password field with toggle icon */}
           <div className="password-field">
             <input
               type={showPassword ? 'text' : 'password'}
