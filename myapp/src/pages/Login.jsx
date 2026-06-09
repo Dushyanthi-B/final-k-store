@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import axios from 'axios';
 import { Usercontext } from '../contexts/Usercontext';
-import { Eye, EyeOff } from 'lucide-react'; // 👁️ import icons
+import { Eye, EyeOff } from 'lucide-react';
+import API_URL from '../config/api';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Login = () => {
     password: '',
     rememberMe: false,
   });
-  const [showPassword, setShowPassword] = useState(false); // 👈 new state
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const { setUser } = useContext(Usercontext);
@@ -37,7 +38,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(`${API_URL}/api/auth/login`, formData);
       const { token, user } = response.data;
 
       if (formData.rememberMe) {
@@ -71,7 +72,6 @@ const Login = () => {
             onChange={handleChange}
           />
 
-          {/* 👇 Password field with toggle icon */}
           <div className="password-field">
             <input
               type={showPassword ? 'text' : 'password'}
