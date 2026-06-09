@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';  // <-- Use useEffect here
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import '../styles/Checkout.css';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { CartContext } from '../contexts/Cartcontext';
-
+import API_URL from '../config/api';
 
 const Checkout = () => {
   const { clearCart } = useContext(CartContext);
@@ -23,12 +23,11 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [invoiceGenerated, setInvoiceGenerated] = useState(false);
-  const [orderHistory, setOrderHistory] = useState([]);  // <-- State to store order history
+  const [orderHistory, setOrderHistory] = useState([]);
   const [orderId, setOrderId] = useState(null);
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Fetch order history on component mount
   useEffect(() => {
     if (orderConfirmed) {
       fetchOrderHistory();
@@ -38,7 +37,7 @@ const Checkout = () => {
   const fetchOrderHistory = async () => {
     try {
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const response = await fetch('http://127.0.0.1:5000/api/orders/me', {
+      const response = await fetch(`${API_URL}/api/orders/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -47,7 +46,6 @@ const Checkout = () => {
       console.error('Error fetching order history:', error);
     }
   };
-  
 
   const handleShippingChange = (e) => {
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
@@ -83,7 +81,7 @@ const Checkout = () => {
           city: shippingInfo.city,
           postalCode: shippingInfo.postalCode,
         };
-        const res = await fetch('http://127.0.0.1:5000/api/orders', {
+        const res = await fetch(`${API_URL}/api/orders`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -100,7 +98,6 @@ const Checkout = () => {
         }
         setOrderId(created._id);
         setOrderConfirmed(true);
-        // Immediately generate invoice and clear cart after successful order creation
         generateInvoice();
         clearCart();
         setInvoiceGenerated(true);
@@ -116,11 +113,8 @@ const Checkout = () => {
   const generateInvoice = () => {
     const doc = new jsPDF({ unit: 'pt', format: 'a4' });
 
-    // Header with optional logo
     const drawHeader = () => {
       try {
-        // Using vite.svg from public as a placeholder logo
-        // Note: fetch/addImage is async; keeping header text immediate for reliability
       } catch {}
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(20);
@@ -135,7 +129,6 @@ const Checkout = () => {
 
     drawHeader();
 
-    // Title and meta
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.text('Invoice', 40, 124);
@@ -143,7 +136,6 @@ const Checkout = () => {
     doc.setFontSize(11);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 110, 124);
 
-    // Bill To
     doc.setFont('helvetica', 'bold');
     doc.text('Bill To:', 40, 150);
     doc.setFont('helvetica', 'normal');
@@ -151,7 +143,6 @@ const Checkout = () => {
     doc.text(`${shippingInfo.address}`, 40, 182);
     doc.text(`${shippingInfo.city} - ${shippingInfo.postalCode}`, 40, 198);
 
-    // Table header
     let y = 230;
     doc.setFont('helvetica', 'bold');
     doc.setFillColor(245, 245, 245);
@@ -161,7 +152,6 @@ const Checkout = () => {
     doc.text('Price', 410, y);
     doc.text('Amount', 480, y);
 
-    // Table rows
     doc.setFont('helvetica', 'normal');
     let rowY = y + 24;
     cartItems.forEach((item) => {
@@ -173,7 +163,6 @@ const Checkout = () => {
       rowY += 20;
     });
 
-    // Totals
     const subtotal = cartItems.reduce((s, it) => s + it.price * it.quantity, 0);
     const shippingCost = 0;
     const grandTotal = subtotal + shippingCost;
@@ -193,7 +182,6 @@ const Checkout = () => {
     doc.setFont('helvetica', 'normal');
     doc.text(`Rs.${grandTotal}`, 480, rowY);
 
-    // Footer
     doc.setDrawColor(220);
     doc.line(40, 760, 555, 760);
     doc.setFont('helvetica', 'italic');
@@ -209,8 +197,6 @@ const Checkout = () => {
     alert("Logged out successfully");
     navigate('/home');
   };
-
-  
 
   return (
     <div className="page-wrapper">
@@ -266,7 +252,6 @@ const Checkout = () => {
           </section>
         )}
 
-        {/* Order History Section */}
         {orderConfirmed && (
           <section className="order-history">
             <h2>Your Order History</h2>
